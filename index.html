@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simonelle &amp; Mammen — 8th January 2027</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="8th January 2027 · Gallops, Mumbai">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simonelle &amp; Mammen">
+<meta property="og:description" content="8th January 2027 · Gallops, Mumbai. You're invited — tap to open.">
+<meta property="og:url" content="https://simonelleandmammen.github.io/">
+<meta property="og:image" content="https://simonelleandmammen.github.io/assets/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#5e2a33">
+<link rel="icon" type="image/png" href="assets/monogram-green.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,600&family=Cinzel:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Allura&display=swap">
+<link rel="preload" as="image" href="assets/couple.jpg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;font-family:'Cormorant Garamond',Georgia,serif;background:#1a1208;}
+body.env-open{background:#e7dabb;}
+
+/* ---- SHARED ---- */
+.section{position:relative;width:100%;min-height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.bg{position:absolute;inset:0;background-size:cover;background-position:center center;z-index:0;}
+.monogram{position:absolute;top:22px;left:22px;z-index:10;}
+.monogram img{width:62px;height:62px;object-fit:contain;
+  filter:brightness(0) saturate(100%) invert(28%) sepia(30%) saturate(600%) hue-rotate(330deg) brightness(80%);}
+.monogram.gold img{filter:brightness(0) saturate(100%) invert(85%) sepia(15%) saturate(200%) hue-rotate(20deg) brightness(90%);}
+.eyebrow{font-family:'Cinzel',serif;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:#4a2e1a;margin-bottom:12px;}
+.ornament{display:flex;align-items:center;gap:10px;margin-bottom:24px;}
+.orn-line{width:38px;height:0.5px;background:#7a3040;opacity:.55;}
+.orn-diamond{width:5px;height:5px;background:#7a3040;transform:rotate(45deg);opacity:.75;}
+.ornament.gold .orn-line{background:rgba(200,185,155,.5);}
+.ornament.gold .orn-diamond{background:rgba(200,185,155,.6);}
+.title,.countdown-title,.venue-name,.schedule-event{font-family:'Gotrie','Playfair Display',Georgia,serif;}
+.schedule-event{font-weight:500;letter-spacing:.2px;}
+.content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;padding:60px 28px;max-width:480px;width:100%;}
+
+/* ---- 1. ENVELOPE ---- */
+#envelope{position:fixed;inset:0;z-index:50;background:#5e2a33;cursor:pointer;flex-direction:column;
+  transition:transform .85s cubic-bezier(.6,.02,.2,1),opacity .85s ease;-webkit-tap-highlight-color:transparent;overflow-y:auto;}
+#envelope.opened{transform:translateY(102vh);opacity:0;pointer-events:none;}
+#envelope:focus-visible{outline:2px solid rgba(232,226,200,.8);outline-offset:-8px;}
+.env-card{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;padding:32px 24px;margin:auto;}
+.env-mono{width:46px;height:auto;margin-bottom:18px;opacity:.9;filter:brightness(0) invert(92%) sepia(18%) saturate(260%) hue-rotate(5deg);}
+.env-eyebrow{font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:4px;text-transform:uppercase;color:rgba(240,232,206,.88);margin-bottom:44px;}
+@media (max-width:400px){.env-eyebrow{letter-spacing:3px;text-wrap:balance;}}
+.env-oval{position:relative;width:min(58vw,250px);aspect-ratio:4/5;}
+.env-oval-ring{position:absolute;inset:-26px;border-radius:50%;background:#565033;border:1px solid rgba(226,210,166,.7);box-shadow:0 16px 44px rgba(30,8,14,.45),inset 0 0 0 7px #565033,inset 0 0 0 8px rgba(226,210,166,.45);}
+.env-oval-photo{position:absolute;inset:0;border-radius:50%;background:#3a3522 url('assets/couple.jpg') center 35%/cover no-repeat;
+  box-shadow:0 14px 40px rgba(20,18,8,.45),inset 0 0 18px 4px rgba(40,38,24,.45);}
+.env-names{font-family:'Gotrie','Playfair Display',Georgia,serif;font-size:30px;line-height:1.15;color:#f4ecd4;margin-top:48px;text-shadow:0 1px 3px rgba(0,0,0,.3);}
+.env-date{font-style:italic;font-size:16px;color:rgba(240,232,206,.9);margin-top:6px;}
+.env-hint{margin-top:30px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:rgba(242,236,214,.95);animation:pulse 2.4s infinite;}
+
+#invite{display:none;}
+body.env-open #invite{display:block;}
+
+/* ---- 2. HERO ---- */
+#hero{flex-direction:column;justify-content:flex-start;background:#e7ddc6;}
+#hero .bg{background-image:url('assets/hero.jpg');}
+#hero .content{padding-top:16vh;}
+#hero .content::before{content:'';position:absolute;z-index:-1;width:132%;height:76%;top:5%;left:-16%;
+  background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(244,237,221,.9) 0%,rgba(244,237,221,.52) 48%,transparent 75%);pointer-events:none;}
+.hero-names-img{width:290px;max-width:80%;aspect-ratio:943/485;margin:0 auto 16px;
+  background:url('assets/names.png') center/contain no-repeat;}
+#hero .eyebrow{color:#5e2a25;font-size:10px;font-weight:500;text-shadow:0 1px 6px rgba(245,237,218,.97),0 0 2px rgba(245,237,218,.9);}
+.hero-date{font-family:'Cinzel',serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:#5e2230;font-weight:500;margin-bottom:10px;text-shadow:0 1px 7px rgba(245,237,218,.95),0 0 2px rgba(245,237,218,.9);}
+.hero-venue{font-size:19px;font-style:italic;font-weight:500;color:#2c1810;margin-bottom:30px;text-shadow:0 1px 8px rgba(245,237,218,.95),0 0 3px rgba(245,237,218,.85);}
+.hero-hosts{font-size:14px;font-style:italic;font-weight:500;color:#3a2417;line-height:1.6;margin:8px 0 22px;white-space:nowrap;text-shadow:0 1px 7px rgba(245,237,218,.97),0 0 2px rgba(245,237,218,.9);}
+.hero-scroll{font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#5e2230;font-weight:500;padding:7px 20px;text-shadow:0 1px 4px rgba(245,237,218,.95);background:radial-gradient(ellipse 82% 135% at 50% 50%,rgba(245,238,221,.9) 0%,rgba(245,238,221,.45) 52%,transparent 80%);animation:pulse 2.4s infinite;}
+@keyframes pulse{0%,100%{opacity:.75}50%{opacity:1}}
+
+/* ---- 3. COUNTDOWN ---- */
+#countdown{background:#5e2a33;}
+#countdown .bg{background:#5e2a33 url('assets/countdown.jpg') center/cover;}
+.countdown-tint{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 90% 75% at 50% 38%,rgba(94,42,51,.18) 0%,rgba(46,18,25,.52) 100%);}
+.countdown-crown{display:block;width:auto;height:auto;max-width:206px;max-height:236px;margin:0 auto 18px;filter:drop-shadow(0 3px 12px rgba(0,0,0,.4));}
+.countdown-title{font-size:30px;font-weight:500;color:#f4ecd2;margin-bottom:8px;text-shadow:0 1px 4px rgba(0,0,0,.45);}
+.countdown-subtitle{font-size:14px;font-style:italic;color:rgba(240,228,202,.85);margin-bottom:38px;}
+.countdown-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:380px;width:100%;}
+.countdown-item{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.countdown-num{font-size:clamp(32px,8vw,50px);font-weight:300;color:#ecdfb6;line-height:1;font-variant-numeric:tabular-nums;}
+.countdown-label{font-family:'Cinzel',serif;font-size:7px;letter-spacing:3px;text-transform:uppercase;color:rgba(214,198,160,.72);}
+.cd-calendar{margin-top:34px;padding:11px 30px;background:rgba(236,223,182,.08);border:0.75px solid rgba(214,198,160,.5);
+  font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(236,223,182,.9);cursor:pointer;transition:background .3s;}
+.cd-calendar:hover{background:rgba(236,223,182,.18);}
+
+/* ---- 4. SCHEDULE ---- */
+#schedule .bg{background-image:url('assets/olive.jpg');}
+#schedule .title{font-size:32px;font-weight:500;color:#d8cba0;margin-bottom:12px;text-shadow:0 1px 1px rgba(0,0,0,.55),0 -1px 1px rgba(255,250,230,.10);}
+#schedule .eyebrow{color:rgba(200,185,155,.7);}
+.schedule-list{width:100%;max-width:360px;margin-top:8px;}
+.schedule-row{display:flex;align-items:flex-start;gap:16px;padding:14px 0;border-bottom:0.5px solid rgba(200,185,155,.2);text-align:left;}
+.schedule-row:first-child{border-top:0.5px solid rgba(200,185,155,.2);}
+.schedule-time{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:rgba(226,212,178,.95);min-width:52px;padding-top:3px;}
+.schedule-event{font-size:17px;font-weight:400;color:rgba(240,230,200,.95);line-height:1.3;}
+.schedule-sub{font-size:13px;font-style:italic;color:rgba(222,210,180,.9);margin-top:2px;}
+
+/* ---- 5. VENUE ---- */
+#venue .bg{background-image:url('assets/venue.jpg');background-position:center 40%;}
+#venue .title{font-size:33px;font-weight:500;color:#3a1c20;margin-bottom:12px;text-shadow:0 1px 0 rgba(255,252,245,.85),0 2px 3px rgba(120,70,40,.22),0 -1px 1px rgba(90,40,30,.28);}
+.venue-name{font-size:22px;font-style:italic;color:#1e100a;margin-bottom:6px;}
+.venue-address{font-size:15px;color:#3a2010;line-height:1.7;margin-bottom:28px;}
+.venue-btn{display:inline-block;padding:12px 32px;border:0.75px solid rgba(90,45,30,.5);font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#4a2e1a;text-decoration:none;background:rgba(245,235,210,.3);transition:background .3s;}
+.venue-btn:hover{background:rgba(245,235,210,.55);}
+
+/* ---- 6. DRESS CODE ---- */
+#dresscode .bg{background-image:url('assets/dresscode.jpg');}
+#dresscode .content{padding-top:40px;padding-bottom:40px;}
+.dc-doily{position:relative;width:min(92%,416px);aspect-ratio:636/972;margin:0 auto;background:url('assets/dresscode-card.png') center/contain no-repeat;}
+.dc-doily-body{position:absolute;left:17%;right:17%;top:36%;bottom:7%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:11px;text-align:center;}
+.dc-tagline{font-size:12px;font-style:italic;color:#5a4a2c;line-height:1.5;max-width:235px;margin-bottom:13px;}
+.dc-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:3.5px;text-transform:uppercase;color:#7a6a3a;margin-bottom:4px;}
+.dc-heading{font-size:18px;font-weight:500;color:#43512e;margin-bottom:3px;line-height:1.25;font-family:'Gotrie','Playfair Display',Georgia,serif;}
+.dc-sub{font-size:11.5px;font-style:italic;font-weight:300;color:#5a4a2c;line-height:1.45;max-width:215px;}
+.dc-attire{display:block;width:min(56%,210px);height:auto;margin:20px auto 0;opacity:.92;
+  filter:brightness(0) saturate(100%) invert(86%) sepia(22%) saturate(360%) hue-rotate(2deg) brightness(95%);}
+
+/* ---- 7. FAQ ---- */
+#faq{background:#efe7d6;}
+#faq .bg{background-image:url('assets/faq.jpg');background-position:center bottom;}
+.faq-overlay{position:absolute;inset:0;z-index:1;background:
+  linear-gradient(90deg,rgba(241,234,220,.10) 0%,rgba(241,234,220,.50) 24%,rgba(241,234,220,.60) 50%,rgba(241,234,220,.50) 76%,rgba(241,234,220,.10) 100%),
+  linear-gradient(0deg,rgba(241,234,220,.30) 0%,rgba(241,234,220,0) 30%);}
+.faq-list{width:100%;max-width:340px;}
+#faq .title{font-size:32px;font-weight:500;color:#3a1c20;margin-bottom:10px;text-shadow:0 1px 0 rgba(255,252,245,.85),0 2px 3px rgba(120,70,40,.22),0 -1px 1px rgba(90,40,30,.28);}
+.faq-item{border-bottom:0.5px solid rgba(90,45,30,.3);}
+.faq-item:first-child{border-top:0.5px solid rgba(90,45,30,.3);}
+.faq-q{width:100%;background:none;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:16px 4px;text-align:left;gap:12px;}
+.faq-q-text{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;color:#1e100a;line-height:1.3;text-shadow:0 1px 6px rgba(245,235,210,.4);}
+.faq-icon{flex-shrink:0;width:20px;height:20px;border:0.5px solid rgba(122,48,64,.6);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;color:#7a3040;transition:transform .3s;}
+.faq-a{font-size:14px;font-style:italic;font-weight:300;color:#2e1408;line-height:1.75;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;padding:0 4px;text-align:left;}
+.faq-item.open .faq-a{max-height:240px;padding:0 4px 16px;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+
+/* ---- 8. RSVP ---- */
+#rsvp{background:#e7dabb;}
+.rsvp-frame{position:absolute;inset:clamp(14px,3.5vmin,40px);z-index:0;overflow:hidden;background:#efe6d2;
+  border:1px solid rgba(122,48,64,.5);box-shadow:inset 0 0 0 4px #e7dabb,inset 0 0 0 5px rgba(122,48,64,.28);}
+.rsvp-tiles{position:absolute;inset:0;background:url('assets/rsvp-tiles.png') center/176px auto repeat;opacity:.89;}
+.rsvp-frame::after{content:'';position:absolute;inset:0;background:rgba(252,247,235,.06);pointer-events:none;}
+.rsvp-doily{position:relative;width:min(93vw,430px);aspect-ratio:640/872;margin:0 auto;
+  background:url('assets/rsvp-card.png') center/contain no-repeat;filter:drop-shadow(0 16px 40px rgba(40,15,20,.5));}
+.rsvp-doily-body{position:absolute;left:15%;right:15%;top:37%;bottom:10%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;text-align:center;}
+.rsvp-deadline{font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#4e3f24;line-height:1.5;margin-bottom:3px;}
+.rsvp-form{width:100%;max-width:224px;display:flex;flex-direction:column;gap:3px;}
+.rsvp-input,.rsvp-select{width:100%;background:rgba(255,252,245,.62);border:0.5px solid rgba(90,45,30,.4);border-radius:0;padding:4px 10px;font-family:'Cormorant Garamond',serif;font-size:13px;line-height:1.2;color:#1e100a;outline:none;-webkit-appearance:none;appearance:none;}
+.rsvp-input::placeholder{color:rgba(90,60,40,.5);font-style:italic;}
+.rsvp-input:focus,.rsvp-select:focus{border-color:rgba(122,48,64,.65);background:rgba(255,252,245,.92);}
+.rsvp-select{cursor:pointer;}
+.rsvp-select:invalid,.rsvp-select.empty{color:rgba(90,60,40,.6);font-style:italic;}
+.rsvp-btn{padding:7px;background:rgba(90,45,30,.14);border:0.75px solid rgba(90,45,30,.5);cursor:pointer;font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:3px;text-transform:uppercase;color:#4a2e1a;transition:background .3s;}
+.rsvp-btn:hover{background:rgba(90,45,30,.22);}
+.rsvp-btn:disabled{cursor:default;opacity:.8;}
+.rsvp-msg{font-size:11px;font-style:italic;color:#7a3040;line-height:1.25;}
+.rsvp-msg:not(:empty){background:rgba(250,244,230,.92);padding:3px 6px;}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+
+/* ---- 9. FOOTER ---- */
+#footer{min-height:auto;background:#e7dabb;flex-direction:column;}
+#footer .bg{background-image:url('assets/olive.jpg');opacity:.16;mix-blend-mode:luminosity;}
+.footer-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:18px;padding:54px 28px;}
+.footer-mono{width:58px;height:58px;object-fit:contain;opacity:.9;}
+.footer-names-img{display:block;max-width:230px;width:100%;height:auto;}
+.footer-date{font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#43512e;}
+.footer-signoff{font-style:italic;font-weight:500;font-size:22px;line-height:1.3;color:#43512e;text-align:center;margin-bottom:4px;}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+<noscript><style>#envelope{display:none}#invite{display:block}</style></noscript>
+</head>
+<body>
+
+<section id="envelope" class="section" role="button" tabindex="0" aria-label="Open the invitation">
+  <div class="env-card">
+    <img class="env-mono" src="assets/monogram.png" alt="">
+    <p class="env-eyebrow">You are invited to the wedding of</p>
+    <div class="env-oval"><div class="env-oval-ring"></div><div class="env-oval-photo" role="img" aria-label="Simonelle and Mammen"></div></div>
+    <p class="env-names">Simonelle &amp; Mammen</p>
+    <p class="env-date">8th January 2027 · Mumbai</p>
+    <div class="env-hint">Tap to open</div>
+  </div>
+</section>
+
+<main id="invite">
+<section id="hero" class="section">
+  <div class="bg"></div>
+  <div class="monogram"><img src="assets/monogram.png" alt=""></div>
+  <div class="content">
+    <p class="eyebrow">Together with their families</p>
+    <p class="hero-hosts">Roshni &amp; Farhad Devitre<br>Paul &amp; Beena Paul</p>
+    <h1 class="hero-names-img" role="img" aria-label="Simonelle &amp; Mammen"></h1>
+    <p class="hero-date">8th January 2027</p>
+    <p class="hero-venue">Gallops, Mumbai</p>
+    <div class="ornament"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line"></div></div>
+    <p class="hero-scroll">Scroll to explore ↓</p>
+  </div>
+</section>
+
+<section id="countdown" class="section">
+  <div class="bg"></div>
+  <div class="countdown-tint"></div>
+  <div class="monogram gold"><img src="assets/monogram.png" alt=""></div>
+  <div class="content">
+    <img class="countdown-crown" src="assets/clock.png" alt="" loading="lazy">
+    <p class="eyebrow" style="color:rgba(206,194,158,.8)">Counting down to</p>
+    <h2 class="countdown-title">The Big Day</h2>
+    <p class="countdown-subtitle">8th January 2027 · Gallops, Mumbai</p>
+    <div class="ornament gold"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line"></div></div>
+    <div class="countdown-grid" aria-live="off">
+      <div class="countdown-item"><div class="countdown-num" id="cd-d">00</div><div class="countdown-label">Days</div></div>
+      <div class="countdown-item"><div class="countdown-num" id="cd-h">00</div><div class="countdown-label">Hours</div></div>
+      <div class="countdown-item"><div class="countdown-num" id="cd-m">00</div><div class="countdown-label">Minutes</div></div>
+      <div class="countdown-item"><div class="countdown-num" id="cd-s">00</div><div class="countdown-label">Seconds</div></div>
+    </div>
+    <button class="cd-calendar" type="button" id="add-cal">Add to Calendar</button>
+  </div>
+</section>
+
+<section id="schedule" class="section">
+  <div class="bg"></div>
+  <div class="monogram gold"><img src="assets/monogram.png" alt=""></div>
+  <div class="content">
+    <p class="eyebrow">The day unfolds</p>
+    <h2 class="title">Order of the Day</h2>
+    <div class="ornament gold"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line"></div></div>
+    <div class="schedule-list">
+<div class="schedule-row"><div class="schedule-time">7:30 PM</div><div><div class="schedule-event">Reception</div><div class="schedule-sub">Dinner, dancing &amp; celebrations</div></div></div>
+<div class="schedule-row"><div class="schedule-time">Late</div><div><div class="schedule-event">Dancing &amp; Celebrations</div><div class="schedule-sub">The night is ours</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="venue" class="section">
+  <div class="bg"></div>
+  <div class="monogram"><img src="assets/monogram.png" alt=""></div>
+  <div class="content">
+    <p class="eyebrow">Where to find us</p>
+    <h2 class="title">The Venue</h2>
+    <div class="ornament"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line"></div></div>
+    <p class="venue-name">Gallops</p>
+    <p class="venue-address">Mahalaxmi Racecourse<br>Mumbai, India<br><br><em style="font-size:13px;opacity:.7">Parking available on-site</em></p>
+    <a class="venue-btn" href="https://maps.google.com/?q=Gallops+Mahalaxmi+Racecourse+Mumbai" target="_blank" rel="noopener">View on Map</a>
+  </div>
+</section>
+
+<section id="dresscode" class="section">
+  <div class="bg"></div>
+  <div class="monogram gold"><img src="assets/monogram.png" alt=""></div>
+  <div class="content">
+    <div class="dc-doily" role="img" aria-label="Dress code">
+      <div class="dc-doily-body">
+        <p class="dc-tagline">Two families, two cultures, one celebration — wear what makes you feel your best.</p>
+        <div class="dc-block"><div class="dc-label">Gentlemen</div><div class="dc-heading">Suits</div></div>
+        <div class="dc-block"><div class="dc-label">Ladies</div><div class="dc-heading">Gowns &amp; Sarees</div>
+          <div class="dc-sub">A gown, Parsi saree or South Indian saree — all are equally celebrated.</div></div>
+      </div>
+    </div>
+    <img class="dc-attire" src="assets/attire.png" alt="" loading="lazy">
+  </div>
+</section>
+
+<section id="faq" class="section">
+  <div class="bg"></div>
+  <div class="faq-overlay"></div>
+  <div class="monogram"><img src="assets/monogram.png" alt=""></div>
+  <div class="content">
+    <p class="eyebrow">Good to know</p>
+    <h2 class="title">Frequently Asked</h2>
+    <div class="ornament"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line"></div></div>
+    <div class="faq-list">
+<div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span class="faq-q-text">Is parking available?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-a">Yes, parking is available at Gallops.</div></div>
+<div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span class="faq-q-text">What time should I arrive?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-a">The reception begins at 7:30 PM.</div></div>
+<div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span class="faq-q-text">What is the dress code?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-a">Formal attire. Be it a gown, Parsi saree or South Indian saree — all are equally celebrated. Gentlemen, suits are recommended.</div></div>
+<div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span class="faq-q-text">What is the RSVP deadline?</span><span class="faq-icon" aria-hidden="true">+</span></button><div class="faq-a">Please RSVP by 1st December 2026 so we can make all the necessary arrangements.</div></div>
+    </div>
+    <div class="ornament" style="margin-top:32px"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line"></div></div>
+  </div>
+</section>
+
+<section id="rsvp" class="section">
+  <div class="rsvp-frame"><div class="rsvp-tiles"></div></div>
+  <div class="monogram"><img src="assets/monogram.png" alt=""></div>
+  <div class="content">
+    <div class="rsvp-doily">
+      <div class="rsvp-doily-body">
+        <p class="rsvp-deadline">Kindly respond individually by<br>1st December 2026 · This invitation is reserved for the named guest</p>
+        <form class="rsvp-form" id="rsvp-form" novalidate>
+          <input class="rsvp-input" id="f-name" type="text" placeholder="Your full name" autocomplete="name" aria-label="Your full name">
+          <input class="rsvp-input" id="f-contact" type="text" placeholder="Mobile number or email" autocomplete="email" aria-label="Mobile number or email">
+          
+          <select class="rsvp-select" id="f-reception" aria-label="Reception, 7:30 PM">
+            <option value="">Reception · 7:30 PM</option>
+            <option value="yes">Attending the reception</option>
+            <option value="no">Unable to attend</option>
+          </select>
+          <select class="rsvp-select" id="f-meal" aria-label="Meal preference">
+            <option value="">Meal preference</option>
+            <option value="Vegetarian">Vegetarian</option>
+            <option value="Non-Vegetarian">Non-Vegetarian</option>
+          </select>
+          <div class="hp" aria-hidden="true"><input id="f-website" type="text" tabindex="-1" autocomplete="off"></div>
+          <button class="rsvp-btn" id="f-send" type="submit">Send RSVP</button>
+          <p class="rsvp-msg" id="f-msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer" class="section">
+  <div class="bg"></div>
+  <div class="footer-inner">
+    <p class="footer-signoff">We can't wait to celebrate with you</p>
+    <img class="footer-mono" src="assets/monogram-green.png" alt="" loading="lazy">
+    <img class="footer-names-img" src="assets/names-footer.png" alt="Simonelle &amp; Mammen" loading="lazy">
+    <div class="footer-date">8th January 2027 · Gallops, Mumbai</div>
+  </div>
+</footer>
+</main>
+
+<script>
+/* iPhones zoom into small form fields when tapped; this stops that without blocking pinch-zoom */
+if (/iPhone|iPad|iPod/.test(navigator.userAgent)) document.querySelector('meta[name=viewport]').setAttribute('content','width=device-width, initial-scale=1.0, maximum-scale=1.0');
+</script>
+<script src="assets/config.js"></script>
+<script>
+(function(){
+  var PAGE = {"invite": "B", "start": "2027-01-08T19:30:00+05:30", "icsStart": "20270108T140000Z", "icsDesc": "Join us as we celebrate the marriage of Simonelle & Mammen. Reception from 7:30 PM.", "nuptials": false};
+
+  /* envelope */
+  var env = document.getElementById('envelope'), opened = false;
+  function openEnvelope(){
+    if (opened) return; opened = true;
+    document.body.classList.add('env-open');       // invite renders underneath
+    window.scrollTo(0,0);
+    env.classList.add('opened');
+    setTimeout(function(){ env.style.display = 'none'; }, 900);
+  }
+  env.addEventListener('click', openEnvelope);
+  env.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openEnvelope(); } });
+
+  /* countdown */
+  var target = new Date(PAGE.start).getTime();
+  var els = ['d','h','m','s'].map(function(k){ return document.getElementById('cd-' + k); });
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+  function tick(){
+    var diff = Math.max(0, target - Date.now());
+    var v = [Math.floor(diff/86400000), Math.floor(diff%86400000/3600000), Math.floor(diff%3600000/60000), Math.floor(diff%60000/1000)];
+    for (var i=0;i<4;i++) els[i].textContent = pad(v[i]);
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* add to calendar */
+  document.getElementById('add-cal').addEventListener('click', function(){
+    var ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Simonelle & Mammen//Wedding//EN','CALSCALE:GREGORIAN','BEGIN:VEVENT',
+      'UID:simonelle-mammen-2027-01-08-' + PAGE.invite + '@wedding','DTSTAMP:20260101T000000Z',
+      'DTSTART:' + PAGE.icsStart,'DTEND:20270108T193000Z',"SUMMARY:Simonelle & Mammen's Wedding",
+      'LOCATION:Gallops\\, Mahalaxmi Racecourse\\, Mumbai','DESCRIPTION:' + PAGE.icsDesc.replace(/,/g,'\\,'),
+      'END:VEVENT','END:VCALENDAR'].join('\r\n');
+    var url = URL.createObjectURL(new Blob([ics], {type:'text/calendar;charset=utf-8'}));
+    var a = document.createElement('a'); a.href = url; a.download = 'Simonelle-Mammen-Wedding.ics';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
+  });
+
+  /* FAQ accordion: one open at a time */
+  var items = document.querySelectorAll('.faq-item');
+  Array.prototype.forEach.call(items, function(item){
+    item.querySelector('.faq-q').addEventListener('click', function(){
+      var wasOpen = item.classList.contains('open');
+      Array.prototype.forEach.call(items, function(i){ i.classList.remove('open'); i.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
+      if (!wasOpen) { item.classList.add('open'); this.setAttribute('aria-expanded','true'); }
+    });
+  });
+
+  /* RSVP */
+  var form = document.getElementById('rsvp-form'), msg = document.getElementById('f-msg'), btn = document.getElementById('f-send');
+  var $ = function(id){ var el = document.getElementById(id); return el ? el.value.trim() : ''; };
+  Array.prototype.forEach.call(form.querySelectorAll('select'), function(s){
+    var sync = function(){ s.classList.toggle('empty', !s.value); }; sync(); s.addEventListener('change', sync);
+  });
+  function say(t){ msg.textContent = t; }
+
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var name = $('f-name').replace(/\s+/g,' '), contact = $('f-contact');
+    var nuptials = PAGE.nuptials ? $('f-nuptials') : 'n/a', reception = $('f-reception'), meal = $('f-meal');
+    var attendingAny = nuptials === 'yes' || reception === 'yes';
+    if (name.split(' ').length < 2) return say('Please enter your first and last name.');
+    if (!contact) return say('Please add a mobile number or email.');
+    if (!nuptials || !reception) return say('Please choose whether you can attend.');
+    if (attendingAny && !meal) return say('Please choose a meal preference.');
+    if (!window.RSVP_URL) return say('RSVP is not connected yet.');
+
+    btn.disabled = true; btn.textContent = 'Sending…'; say('');
+    var payload = { name:name, contact:contact, nuptials:nuptials, reception:reception,
+      meal: attendingAny ? meal : '', invite:PAGE.invite, website:$('f-website') };
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 25000);
+
+    fetch(window.RSVP_URL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify(payload), redirect:'follow', signal: ctrl ? ctrl.signal : undefined })
+    .then(function(r){ return r.json(); })
+    .then(function(res){
+      clearTimeout(timer);
+      if (res && res.notFound) {
+        btn.disabled = false; btn.textContent = 'Send RSVP';
+        return say(res.unsure
+          ? 'Please enter your full name as it appears on your invitation.'
+          : "We couldn't find this name. Please use the name on your invitation.");
+      }
+      if (!res || !res.ok) throw new Error('not ok');
+      btn.textContent = 'RSVP Sent ✓';
+      say(res.updated ? 'Your RSVP has been updated. Thank you.'
+        : attendingAny ? 'Thank you! We look forward to celebrating with you.'
+        : "Thank you for letting us know. You'll be missed.");
+      setTimeout(function(){ btn.disabled = false; btn.textContent = 'Update RSVP'; }, 4000);
+    })
+    .catch(function(){
+      clearTimeout(timer);
+      btn.disabled = false; btn.textContent = 'Send RSVP';
+      say("We couldn't send your RSVP. Check your connection and tap Send RSVP again.");
+    });
+  });
+})();
+</script>
+</body>
+</html>
